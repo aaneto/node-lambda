@@ -1,6 +1,6 @@
 {
   "name": "@aaneto/lambda-ts-cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A simple CLI to invoke and deploy lambda functions using typescript",
   "main": "main.js",
   "scripts": {

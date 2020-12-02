@@ -19,15 +19,17 @@ Example of a .env file:
 AWS_KEY_ID=$YOUR_KEY_ID
 AWS_SECRET=$YOUR_SECRET
 AWS_REGION=$YOUR_REGION
+AWS_ROLE$YOUR_LAMBDA_ROLE
 ```
 
 ## How to deploy a function
 
 1. Build your typescript app
 2. run ```lambda-ts deploy -f $FUNCTION_NAME -r $FUNCTION_ROLE -b $PATH_TO_BUILD_FOLDER```
-3. You should see the response on the terminal and the lambda on the AWS panel
+3. If you provide the function role in the .env file, you don't need to do it on the cli
+4. You should see the response on the terminal and the lambda on the AWS panel
 
-New functions will be created, if your function already exists, only the code will be updated.
+New functions will be created, if your function already exists, only the code will be updated
 
 ## How to invoke a function
 
