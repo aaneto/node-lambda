@@ -16,16 +16,16 @@ async function readDescriptionFromCwd(): Promise<string> {
     try {
         const fullPath = path.join(process.cwd(), "package.json");
         const config = await fs.readJson(fullPath);
-        return config["description"] || "";
-    } finally {
-        return "";
+        return config.description;
+    } catch (e) {
+        console.log("Could not read package.json for project");
+        throw e;
     }
 }
 
 export default async function() {
     program.parse(process.argv);
     const description = await readDescriptionFromCwd();
-
     const role = program.role || process.env.AWS_ROLE;
     if (!role) {
         throw "The lambda role must be provided! Either by CLI argument or by environment variable."
