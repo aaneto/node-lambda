@@ -1,11 +1,11 @@
 {
   "name": "@aaneto/lambda-ts-cli",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A simple CLI to invoke and deploy lambda functions using typescript",
   "main": "main.js",
   "scripts": {
     "build": "npx tsc",
-    "publish": "npx tsc && npm publish --access public",
+    "upload": "npx tsc && npm publish --access public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
