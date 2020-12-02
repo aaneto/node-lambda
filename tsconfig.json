@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "target": "es2017",
+        "module": "commonjs",
+        "strictNullChecks": true,
+        "experimentalDecorators": true,
+        "noImplicitAny": true,
+        "inlineSources": true,
+        "sourceMap": true,
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "lib": [
+            "dom",
+            "es2017",
+            "esnext"
+        ],
+        "outDir": "build"
+    },
+    "include": [
+        "src/**/*",
+        "test/**/*",
+        "./types.d.ts",
+        "*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "src/pipelines"
+    ]
+}
