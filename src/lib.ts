@@ -114,7 +114,15 @@ async function certifyBucketExist(bucketName: string) {
     const bucketExists = await doesBucketExist(bucketName);
     if (!bucketExists) {
         await createBucket(bucketName);
+        return true;
     }
+    return false;
+}
+
+async function deleteBucket(bucketName: string, bucketKey: string) {
+    const s3 = new S3();
+    await s3.deleteObject({ Bucket: bucketName, Key: bucketKey }).promise();
+    await s3.deleteBucket({ Bucket: bucketName }).promise();
 }
 
 export interface DeployData {
@@ -141,17 +149,31 @@ export async function deployFunction(data: DeployData) {
         description: data.description
     };
     await zipFunctionData(data.name);
-    await certifyBucketExist(bucketName);
-    await uploadFunctionData(bucketName, bucketKey, data.name);
+    let wasBucketCreated = false;
+    let wasFunctionCreated = false;
 
-    fs.unlinkSync(bucketKey);
+    try {
+        wasBucketCreated = await certifyBucketExist(bucketName);
+        await uploadFunctionData(bucketName, bucketKey, data.name);
 
-    if (isFunctionCreated) {
-        const output = await updateFunctionCode(lambdaData);
-        return output;
-    } else {
-        const output = await createFunction(lambdaData);
-        return output;
+        fs.unlinkSync(bucketKey);
+
+        if (isFunctionCreated) {
+            wasFunctionCreated = true;
+            const output = await updateFunctionCode(lambdaData);
+            return output;
+        } else {
+            const output = await createFunction(lambdaData);
+            wasFunctionCreated = true;
+            return output;
+        }
+    } catch (e) {
+        console.error(`Could not create function`);
+        if (wasBucketCreated && !wasFunctionCreated) {
+            await deleteBucket(bucketName, bucketKey);
+            console.log("Generated bucket was deleted");
+            return e;
+        }
     }
 }
 
