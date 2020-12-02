@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import deploy from "./deploy";
 import invoke from "./invoke";
 
