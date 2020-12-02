@@ -7,7 +7,13 @@
     "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["lambda", "typescript"],
+  "bin": {
+    "lambda-ts": "build/src/main.js"
+  },
+  "keywords": [
+    "lambda",
+    "typescript"
+  ],
   "author": "Adilson Neto",
   "license": "MIT",
   "dependencies": {
