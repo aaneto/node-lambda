@@ -1,4 +1,5 @@
 # ts-lambda-cli
+[![NPM](https://nodei.co/npm/@aaneto/lambda-ts-cli.png)](https://npmjs.org/package/@aaneto/lambda-ts-cli)
 
 A simple CLI tool to invoke and deploy lambda functions based on typescript projects.
 
